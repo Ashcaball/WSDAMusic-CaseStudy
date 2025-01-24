@@ -34,3 +34,26 @@ FROM Customer C
 LEFT JOIN Invoice I 
 ON C.CustomerId = I.CustomerId;
 
+/* What employees are reponsible for the top 10 individual sales? I will join Invoice, Customer, and Employee tables to find this data. */
+
+SELECT 
+E.FirstName,
+E.LastName,
+C.FirstName,
+C.LastName,
+C.SupportRepId,
+I.CustomerId,
+I.total
+FROM  
+	Invoice I
+INNER JOIN 
+	Customer C
+ON 
+I.CustomerId = C.CustomerId
+INNER JOIN 
+	Employee E
+ON 
+C.SupportRepId = E.EmployeeId
+ORDER BY
+ I.total DESC
+LIMIT 10;
