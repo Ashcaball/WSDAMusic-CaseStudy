@@ -22,3 +22,9 @@ END AS PriceCategory
 FROM Track
 ORDER BY UnitPrice ASC;
 
+/* Gathering more customer data by combining 'Customer' and 'Invoice' Tables */
+
+SELECT C.CustomerId, C.FirstName, C.LastName, I.InvoiceDate, I.BillingCity, I.total
+FROM Customer C
+LEFT JOIN Invoice I ON C.CustomerId = I.CustomerId;
+
