@@ -61,11 +61,11 @@ LIMIT 10;
 /* Listing customers along with their support reprisentatives by joinng 'Customer' and 'Employee' Tables. */
 
 SELECT 
-    c.FirstName AS CustomerFirstName
+    c.FirstName AS CustomerFirstName,
     c.LastName AS CustomerLastName,
-    e.FirstName AS SupportRepFirstName
+    e.FirstName AS SupportRepFirstName,
     e.LastName AS SupportRepLastName
 FROM Customer AS c
 INNER JOIN Employee AS e
-ON c.CUSTOMERID = e.CustomerID
-ORDER BY e.LastName, c.LASTNAME;
+ON c.SupportRepId = e.EmployeeId
+ORDER BY e.LastName, c.LastName;
