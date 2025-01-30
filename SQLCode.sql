@@ -79,7 +79,7 @@ SELECT
 FROM
 	Customer
 WHERE 
-	Country = 'USA'
+	Country = 'USA';
 
 /* Practice with string functions */
 
@@ -95,5 +95,15 @@ SELECT
 FROM
 	Customer
 WHERE 
-	Country = 'USA'
+	Country = 'USA';
 
+/* Claculating e,ployee age using the strftime() function */
+
+SELECT 
+	FirstName,
+	LastName,
+	BirthDate,
+	strftime('%Y-%m-%d',Birthdate) AS 'BirthDate No Timecode',
+	strftime ('%Y-%m-%d','now') - strftime('%Y-%m-%d',Birthdate) AS EmployeeAge
+FROM
+	Employee;
