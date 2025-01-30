@@ -69,3 +69,16 @@ FROM Customer AS c
 INNER JOIN Employee AS e
 ON c.SupportRepId = e.EmployeeId
 ORDER BY e.LastName, c.LastName;
+
+/* Customer Mailing Address*/
+SELECT 
+	FirstName,
+	LastName,
+	Address,
+	FirstName ||' '|| LastName ||' '|| Address||','||City||','||State||' '||PostalCode AS MailingAddress
+FROM
+	Customer
+WHERE 
+	Country = 'USA'
+
+
