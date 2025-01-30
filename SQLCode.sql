@@ -70,7 +70,7 @@ INNER JOIN Employee AS e
 ON c.SupportRepId = e.EmployeeId
 ORDER BY e.LastName, c.LastName;
 
-/* Customer Mailing Address*/
+/*Putting together Customer Mailing Address*/
 SELECT 
 	FirstName,
 	LastName,
@@ -81,4 +81,19 @@ FROM
 WHERE 
 	Country = 'USA'
 
+/* Practice with string functions */
+
+SELECT 
+	FirstName,
+	LastName,
+	Address,
+	FirstName ||' '|| LastName ||' '|| Address||','||City||','||State||' '||PostalCode AS MailingAddress,
+	length (postalcode),
+	substr(postalcode,1,5) AS '5 Digit Zip',
+	upper(firstname) AS 'AllCapFistName',
+	lower(lastname) AS 'AllCapLastName'
+FROM
+	Customer
+WHERE 
+	Country = 'USA'
 
