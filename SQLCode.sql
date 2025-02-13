@@ -107,3 +107,18 @@ SELECT
 	strftime ('%Y-%m-%d','now') - strftime('%Y-%m-%d',Birthdate) AS EmployeeAge
 FROM
 	Employee;
+
+/* Practice with aggregate functions */
+SELECT
+	sum(total) AS 'TotalSales',
+	round((avg(total)),2) AS 'AverageSales',
+	max(total) AS 'MaxSale',
+	min(total) AS 'MinTotal',
+	Count(*) AS 'Sale Count'
+FROM 
+	Invoice
+	
+	SELECT  
+FirstName || ' ' || LastName AS "CUSTOMERFULLNAME",
+substr('ZIPCODE',1,5) AS "STANDARDIZEDPOSTALCODE"
+FROM Customer;
