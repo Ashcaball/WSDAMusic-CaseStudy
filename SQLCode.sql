@@ -122,3 +122,10 @@ FROM
 FirstName || ' ' || LastName AS "CUSTOMERFULLNAME",
 substr('ZIPCODE',1,5) AS "STANDARDIZEDPOSTALCODE"
 FROM Customer;
+
+/* What is the average invoice total for each city? */
+
+SELECT BillingCity, round(avg(total),2)
+from Invoice
+group by 1
+order by 1
