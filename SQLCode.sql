@@ -97,6 +97,11 @@ FROM
 WHERE 
 	Country = 'USA';
 
+SELECT  
+	FirstName || ' ' || LastName AS "CUSTOMERFULLNAME",
+	substr('ZIPCODE',1,5) AS "STANDARDIZEDPOSTALCODE"
+FROM 
+	Customer;
 /* Claculating e,ployee age using the strftime() function */
 
 SELECT 
@@ -118,14 +123,12 @@ SELECT
 FROM 
 	Invoice
 	
-	SELECT  
-FirstName || ' ' || LastName AS "CUSTOMERFULLNAME",
-substr('ZIPCODE',1,5) AS "STANDARDIZEDPOSTALCODE"
-FROM Customer;
 
 /* What is the average invoice total for each city? */
 
-SELECT BillingCity, round(avg(total),2)
-from Invoice
+SELECT 
+	BillingCity, round(avg(total),2)
+FROM
+	Invoice
 group by 1
-order by 1
+order by 1;
