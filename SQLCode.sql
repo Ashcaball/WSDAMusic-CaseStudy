@@ -142,3 +142,17 @@ FROM
 	Invoice
 GROUP BY BillingCountry, BillingCity 
 ORDER BY BillingCountry;
+
+/* Subquery | Gather data about all invoices that are less than the average total */
+
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	total
+FROM
+	Invoice
+WHERE 
+	total < (SELECT avg(total) FROM Invoice)
+ORDER BY 
+	total DESC;
