@@ -132,3 +132,13 @@ FROM
 	Invoice
 group by 1
 order by 1;
+
+/* What are the averae invoice totals by country and city? */
+SELECT 
+	BillingCountry, 
+	BillingCity, 
+	round(avg(total),2)
+FROM 
+	Invoice
+GROUP BY BillingCountry, BillingCity 
+ORDER BY BillingCountry;
