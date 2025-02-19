@@ -156,3 +156,5 @@ WHERE
 	total < (SELECT avg(total) FROM Invoice)
 ORDER BY 
 	total DESC;
+
+/* 
