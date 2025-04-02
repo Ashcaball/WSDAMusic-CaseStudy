@@ -181,7 +181,7 @@ FROM
 WHERE 
 	InvoiceDate >
 (SELECT 
-	InvoiceDate FROM Invoice WHERE InvoiceId = 251)
+	InvoiceDate FROM Invoice WHERE InvoiceId = 251);
 
 /* Subquery | Returning Multiple Values */
 
@@ -193,7 +193,7 @@ FROM
 	Invoice
 WHERE
 	InvoiceDate IN
-(SELECT InvoiceDate FROM Invoice WHERE InvoiceId IN (251, 252, 254))
+(SELECT InvoiceDate FROM Invoice WHERE InvoiceId IN (251, 252, 254));
 
 /* Subquery | Using DISTINCT - Which tracks are not selling? */
 
@@ -211,4 +211,21 @@ NOT IN
 FROM 
 	InvoiceLine
 ORDER BY 
-	TrackId)
+	TrackId);
+
+/* Subquery | Identify track that have never been sold, by using a JOIN and DISTINCT */
+
+SELECT 
+	t.TrackID AS "TrackId",
+	t.Name AS "TrackName",
+	t.Composer,
+	g.Name AS Genre
+FROM 
+	Track t
+JOIN 
+	Genre g ON t.GenreId = g.GenreId
+WHERE 
+	t.TrackId NOT IN 
+	(SELECT DISTINCT li.TrackId
+	FROM InvoiceLine li)
+	ORDER BY 2 ASC;
