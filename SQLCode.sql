@@ -157,4 +157,17 @@ WHERE
 ORDER BY 
 	total DESC;
 
-/* 
+/* Subquery | How is each individual city performing against the global averaeg sales? */
+
+SELECT 
+	BillingCity,
+	round((AVG(total)),2) AS 'City Average',
+	(SELECT round((AVG(total)),2) FROM INVOICE) AS 'Global Average'
+FROM
+	Invoice
+GROUP BY 
+	BillingCity 
+ORDER BY 
+	BillingCity;
+
+
