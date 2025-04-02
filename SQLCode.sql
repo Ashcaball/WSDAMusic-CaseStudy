@@ -194,3 +194,21 @@ FROM
 WHERE
 	InvoiceDate IN
 (SELECT InvoiceDate FROM Invoice WHERE InvoiceId IN (251, 252, 254))
+
+/* Subquery | Using DISTINCT - Which tracks are not selling? */
+
+SELECT 
+	TrackId,
+	Composer,
+	Name
+FROM 
+	Track
+WHERE TrackId
+NOT IN
+(SELECT 
+	DISTINCT
+	TrackId
+FROM 
+	InvoiceLine
+ORDER BY 
+	TrackId)
