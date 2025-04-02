@@ -170,4 +170,15 @@ GROUP BY
 ORDER BY 
 	BillingCity;
 
+/* Subquery | Non- Agregate */
 
+SELECT
+	InvoiceDate,
+	BillingAddress,
+	BillingCity
+FROM
+	Invoice
+WHERE 
+	InvoiceDate >
+(SELECT 
+	InvoiceDate FROM Invoice WHERE InvoiceId = 251)
