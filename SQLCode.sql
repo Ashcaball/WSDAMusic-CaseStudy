@@ -243,3 +243,9 @@ FROM
 INSERT INTO
 	Artist(Name)
 	VALUES ("Rauw Alejandro");
+
+/* DML | Updating Data */
+UPDATE
+Artist
+SET Name = "Bad Bunny"
+WHERE ArtistId = 276;
