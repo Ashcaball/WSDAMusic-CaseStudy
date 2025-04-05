@@ -245,7 +245,14 @@ INSERT INTO
 	VALUES ("Rauw Alejandro");
 
 /* DML | Updating Data */
+
 UPDATE
 Artist
 SET Name = "Bad Bunny"
+WHERE ArtistId = 276;
+
+/* DML | Deleting Data */
+
+DELETE FROM
+Artist
 WHERE ArtistId = 276;
