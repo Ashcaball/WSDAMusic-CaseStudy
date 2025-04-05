@@ -229,3 +229,11 @@ WHERE
 	(SELECT DISTINCT li.TrackId
 	FROM InvoiceLine li)
 	ORDER BY 2 ASC;
+
+/* Creating Views */
+
+CREATE VIEW V_AvgTotal AS 
+SELECT
+	round(avg(total),2) AS "Average Total"
+FROM
+	Invoice;
