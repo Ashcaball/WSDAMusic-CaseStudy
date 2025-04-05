@@ -237,3 +237,9 @@ SELECT
 	round(avg(total),2) AS "Average Total"
 FROM
 	Invoice;
+
+/* DML | Inserting Data */
+
+INSERT INTO
+	Artist(Name)
+	VALUES ("Rauw Alejandro");
