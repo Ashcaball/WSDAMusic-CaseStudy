@@ -75,12 +75,11 @@ WHERE
  /* With the result from the previous query I can now find how many transactions are above the average. RESULT: 26 */
 
 SELECT 
-	C.CustomerId,
-	C.FirstName 'CustomerFirstName',
-	C.LastName 'CustomerLastName',
+	C.CustomerId, C.FirstName 'CustomerFirstName', 
+	C.LastName 'CustomerLastName', 
 	I.InvoiceDate,
-	I.total 'TotalTransactionAmount',
-	C.SupportRepId,
+	I.total 'TotalTransactionAmount', 
+	C.SupportRepId, 
 	E.FirstName 'RepFirstName',
 	E.LastName 'RepLastName'
 FROM
@@ -95,6 +94,11 @@ order by 1;
 
 /*  4. What is the average transaction amount for each year that WSDA Music has been in business? */
 
+SELECT
+strftime ('%Y', InvoiceDate) AS Year,
+round(avg(total),2) AS 'Average Total'
+FROM Invoice
+group by 1;
 
         /* CHALLENGE 3 | Queries to perform an in depth analysis with the aim of finding employees who may have been finacially motivated to commit crime */
 
