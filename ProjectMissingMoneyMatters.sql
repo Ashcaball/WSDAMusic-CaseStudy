@@ -30,18 +30,20 @@ WHERE
         /* CHALLENGE 2 | More targeted questions that query tables containing data about customers and employees. */
 
 /*  1. Get a list of customers who made purchases between 2011 and 2012. */
-
+	 
 SELECT 
 	C.CustomerId,
 	C.FirstName,
 	C.LastName,
+	I.total,
 	I.InvoiceDate
 FROM
 	Customer C
 JOIN Invoice I 
 ON C.CustomerId = I.CustomerId
 WHERE 
- InvoiceDate BETWEEN '2011-01-01 00:00:00' AND '2012-12-31 00:00:00';
+ InvoiceDate BETWEEN '2011-01-01 00:00:00' AND '2012-12-31 00:00:00'
+Order by 4 desc;
 
 /* 2. Get a list of customers, sales reps, and total transaction amounts for each customer between 2011 and 2012. */
 
@@ -50,7 +52,7 @@ SELECT
 	C.FirstName 'CustomerFirstName',
 	C.LastName 'CustomerLastName',
 	I.InvoiceDate,
-	sum(I.total) 'TotalTransactionAmount',
+	I.total 'TotalTransactionAmount',
 	C.SupportRepId,
 	E.FirstName 'RepFirstName',
 	E.LastName 'RepLastName'
@@ -61,7 +63,7 @@ ON c.CustomerId = i.CustomerId
 JOIN Employee E
 ON E.EmployeeId = C.SupportRepId
 WHERE InvoiceDate BETWEEN '2011-01-01 00:00:00' AND '2012-12-31 00:00:00'
-group by 1;
+Order by 5 DESC;
 
 /* 3. How many transactions are above the average transaction amount during the same time period? */
   /* First I have to find the average transaction amout with this query. RESULT: $11.66 */
