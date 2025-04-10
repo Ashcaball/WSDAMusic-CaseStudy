@@ -90,7 +90,10 @@ JOIN Invoice I
 ON C.CustomerId = I.CustomerId
 JOIN Employee E
 ON E.EmployeeId = C.SupportRepId
-WHERE I.total > 11.66 AND
+WHERE I.total > (SELECT round(avg(total),2) AS [Avg Transaction Amount] 
+                 FROM Invoice 
+                 WHERE InvoiceDate >= '2011-01-01' AND InvoiceDate <='2012-12-31') 
+AND
 InvoiceDate BETWEEN '2011-01-01 00:00:00' AND '2012-12-31 00:00:00'
 order by 1;
 
