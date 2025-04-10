@@ -128,12 +128,70 @@ order by 2;
 
 /* 2. Create a Commission Payout column that displays each employee’s commission based on 15% of the sales transaction amount. */
 
+SELECT 
+	C.CustomerId,
+	I.InvoiceDate,
+	I.total 'TotalTransactionAmount', 
+	C.SupportRepId, 
+	E.FirstName 'RepFirstName',
+	E.LastName 'RepLastName',
+	round((I.total*0.15),2) AS 'Commission'
+FROM
+	Customer C
+JOIN Invoice I 
+ON C.CustomerId = I.CustomerId
+JOIN Employee E
+ON E.EmployeeId = C.SupportRepId
+WHERE 
+I.total > 17.51 AND
+InvoiceDate BETWEEN '2011-01-01 00:00:00' AND '2011-12-31 00:00:00'
+OR 
+I.total > 5.75 AND
+InvoiceDate BETWEEN '2012-01-01 00:00:00' AND '2012-12-31 00:00:00'
+order by 7 DESC;
+
 /*  3. Which employee made the highest commission? */
+
+Based on the previous query ordering the 'Commission' field in descending order Jane Peacock 
+had the highest commosion of $150.00.
 
 /*  4. List the customers that the employee identified in the last question. */
 
+	SELECT 
+	C.CustomerId,
+	C.FirstName,
+	C.LastName,
+	I.InvoiceDate,
+	I.total 'TotalTransactionAmount', 
+	C.SupportRepId, 
+	E.FirstName 'RepFirstName',
+	E.LastName 'RepLastName',
+	round((I.total*0.15),2) AS 'Commission'
+FROM
+	Customer C
+JOIN Invoice I 
+ON C.CustomerId = I.CustomerId
+JOIN Employee E
+ON E.EmployeeId = C.SupportRepId
+WHERE
+C.SupportRepId = '3' AND
+(I.total > 17.51 AND
+InvoiceDate BETWEEN '2011-01-01 00:00:00' AND '2011-12-31 00:00:00'
+OR 
+I.total > 5.75 AND
+InvoiceDate BETWEEN '2012-01-01 00:00:00' AND '2012-12-31 00:00:00')
+order by 5 DESC;
+
 /*  5. Which customer made the highest purchase? */
 
+Based on the previous query I ideantified all customers Jane Peacock worked with. Then, ordering the 
+'TotalTransactionAmount' in desceinging order i found that 'John Doeein' made the highest purchase of $1000.86.
+	
 /*  6. Look at this customer record—do you see anything suspicious? */
 
+Yes, the next highest purchase amount is only $21.86, which is significatly lower.
+	
 /*  7. Who do you conclude is our primary person of interest? */
+
+Jane Peacock is the Primary person of interest for having earned a commission significatly higher than any other 
+employee.
