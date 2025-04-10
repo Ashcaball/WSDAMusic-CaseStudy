@@ -134,11 +134,11 @@ order by 3 desc;
 SELECT 
 	C.CustomerId,
 	I.InvoiceDate,
-	I.total 'TotalTransactionAmount', 
+	sum(I.total) AS 'Total Sales',
+	round((sum(I.total*0.15)),2) AS 'Commission',
 	C.SupportRepId, 
 	E.FirstName 'RepFirstName',
-	E.LastName 'RepLastName',
-	round((I.total*0.15),2) AS 'Commission'
+	E.LastName 'RepLastName'
 FROM
 	Customer C
 JOIN Invoice I 
@@ -146,30 +146,27 @@ ON C.CustomerId = I.CustomerId
 JOIN Employee E
 ON E.EmployeeId = C.SupportRepId
 WHERE 
-I.total > 17.51 AND
-InvoiceDate BETWEEN '2011-01-01 00:00:00' AND '2011-12-31 00:00:00'
-OR 
-I.total > 5.75 AND
-InvoiceDate BETWEEN '2012-01-01 00:00:00' AND '2012-12-31 00:00:00'
-order by 7 DESC;
+InvoiceDate BETWEEN '2011-01-01 00:00:00' AND '2012-12-31 00:00:00'
+group by 5
+order by 7 desc;
 
 /*  3. Which employee made the highest commission? */
 
 Based on the previous query ordering the 'Commission' field in descending order Jane Peacock 
-had the highest commosion of $150.00.
+had the highest commosion of $199.77.
 
 /*  4. List the customers that the employee identified in the last question. */
 
 	SELECT 
-	C.CustomerId,
-	C.FirstName,
-	C.LastName,
-	I.InvoiceDate,
-	I.total 'TotalTransactionAmount', 
-	C.SupportRepId, 
-	E.FirstName 'RepFirstName',
-	E.LastName 'RepLastName',
-	round((I.total*0.15),2) AS 'Commission'
+C.CustomerId,
+C.FirstName,
+C.LastName,
+I.InvoiceDate,
+sum(I.total) 'TotalTransactionAmount', 
+C.SupportRepId, 
+E.FirstName 'RepFirstName',
+E.LastName 'RepLastName',
+round((sum(I.total*.15)),2) AS 'Commission'
 FROM
 	Customer C
 JOIN Invoice I 
@@ -177,14 +174,12 @@ ON C.CustomerId = I.CustomerId
 JOIN Employee E
 ON E.EmployeeId = C.SupportRepId
 WHERE
-C.SupportRepId = '3' AND
-(I.total > 17.51 AND
-InvoiceDate BETWEEN '2011-01-01 00:00:00' AND '2011-12-31 00:00:00'
+e.LastName = 'Peacock'  AND
+(InvoiceDate BETWEEN '2011-01-01 00:00:00' AND '2011-12-31 00:00:00'
 OR 
-I.total > 5.75 AND
-InvoiceDate BETWEEN '2012-01-01 00:00:00' AND '2012-12-31 00:00:00')
-order by 5 DESC;
-
+InvoiceDate BETWEEN '2012-01-01 00:00:00' AND '2012-12-31 00:00:00') 
+group by 2, 3, 7, 8
+;
 /*  5. Which customer made the highest purchase? */
 
 Based on the previous query I ideantified all customers Jane Peacock worked with. Then, ordering the 
@@ -192,7 +187,14 @@ Based on the previous query I ideantified all customers Jane Peacock worked with
 	
 /*  6. Look at this customer record—do you see anything suspicious? */
 
-Yes, the next highest purchase amount is only $21.86, which is significatly lower.
+SELECT 
+	*
+FROM 
+Customer c 
+WHERE 
+c.LastName = 'Doeein';
+
+Yes, upon querying the data, all information about this customer is null.
 	
 /*  7. Who do you conclude is our primary person of interest? */
 
