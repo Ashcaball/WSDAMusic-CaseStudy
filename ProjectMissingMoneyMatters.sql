@@ -193,5 +193,5 @@ Yes, the next highest purchase amount is only $21.86, which is significatly lowe
 	
 /*  7. Who do you conclude is our primary person of interest? */
 
-Jane Peacock is the Primary person of interest for having earned a commission significatly higher than any other 
+'Jane Peacock' is the Primary person of interest for having earned a commission significatly higher than any other 
 employee.
