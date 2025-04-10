@@ -109,11 +109,11 @@ group by 1;
 
 /*  1. Get a list of employees who exceeded the average transaction amount from sales they  
 generated during 2011 and 2012. */
- /* Using the previous query I was able to find that the average transaction amount for 2011 was $17.72 and for 2012 it was $5.75, using those amounts I created this query*/
+ /* Using the previous query I was able to find that the average transaction amount for 2011 and 2012 was $11.74, using those amounts I created this query*/
 SELECT 
 	C.CustomerId,
 	I.InvoiceDate,
-	I.total 'TotalTransactionAmount', 
+	sum(I.total) 'Total Sales', 
 	C.SupportRepId, 
 	E.FirstName 'RepFirstName',
 	E.LastName 'RepLastName'
@@ -124,12 +124,10 @@ ON C.CustomerId = I.CustomerId
 JOIN Employee E
 ON E.EmployeeId = C.SupportRepId
 WHERE 
-I.total > 17.51 AND
-InvoiceDate BETWEEN '2011-01-01 00:00:00' AND '2011-12-31 00:00:00'
-OR 
-I.total > 5.75 AND
-InvoiceDate BETWEEN '2012-01-01 00:00:00' AND '2012-12-31 00:00:00'
-order by 2;
+I.total > 11.74 AND
+(InvoiceDate BETWEEN '2011-01-01 00:00:00' AND '2012-12-31 00:00:00')
+group by 4
+order by 3 desc;
 
 /* 2. Create a Commission Payout column that displays each employee’s commission based on 15% of the sales transaction amount. */
 
